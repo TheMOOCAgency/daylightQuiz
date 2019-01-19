@@ -1,0 +1,16 @@
+﻿{ "quiz_title":"Quiz Post-présentiel du chapitre",
+     "quiz_title2":"7-Gestion des coûts du Projet",
+     "quiz_id":107,
+     "quiz_n_questions":30,
+     "quiz_n_questionsMax":36,
+     "answers_file_name":"answers_post_chap7_v1",
+     "question_file_name":"question_post_chap7_v1",
+      "SubLines":[
+        "Vous venez de terminer le J4 du parcours du Parcours de Préparation à la certification PMP®",
+         "Après cette  quatrième journée de formation en présentiel, il est important que vous puissiez valider vos connaissances sur le chapitre « Gestion des coûts du Projet »  du parcours à travers ce Quiz de 30 questions sur ce chapitre, sans limite de temps.",
+         "Vous pourrez refaire ce test autant de fois que vous le désirez. Il est important que vous puisez avoir au moins 25 bonnes réponses sur les 30 questions posées",
+         "Les boutons de navigation « Questions marquées », « Questions non répondues » et « Liste des questions » vous permettent de vous déplacer au sein de ce quiz.",
+"Bon quiz !"
+      ]
+   }
+ 

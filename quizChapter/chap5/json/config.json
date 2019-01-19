@@ -1,0 +1,16 @@
+﻿{ "quiz_title":"Quiz Post-présentiel du chapitre",
+     "quiz_title2":"5-Gestion du périmètre",
+     "quiz_id":105,
+     "quiz_n_questions":30,
+     "quiz_n_questionsMax":44,
+     "answers_file_name":"answers_post_chap5_v3",
+     "question_file_name":"question_post_chap5_v3",
+      "SubLines":[
+         "Vous venez de terminer le J3 du Parcours de Préparation à la certification PMP®",
+         "Après cette  troisième journée de formation en présentiel, il est important que vous puissiez valider vos connaissances sur le chapitre « Gestion du périmètre »  du parcours à travers ce quiz de 30 questions sur ce chapitre, sans limite de temps.",
+         "Vous pourrez refaire ce test autant de fois que vous le désirez. Il est important que vous puissiez avoir au moins 25 bonnes réponses sur les 30 questions posées",
+         "Les boutons de navigation « Questions marquées », « Questions non répondues » et « Liste des questions » vous permettent de vous déplacer au sein de ce quiz.",
+"Bon quiz !"
+      ]
+   }
+ 
