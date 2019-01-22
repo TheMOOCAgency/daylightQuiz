@@ -169,7 +169,7 @@ loadQuestion = function (){
 				console.log(x)      
 				qArray = x["quizQuestionList"]
 				aArray = x["answersList"]
-				configArray = x["config"+prePostMaj];
+				configArray = x["config"+prePostMaj()];
                 for (var i = 0; i < qArray.length; i++) {
                     quizQuestions.push(
 
@@ -456,7 +456,24 @@ window.location.href = "http://51.75.207.43:3000/quizMaster"+master;
 
 
 }
-   </script>
+
+var seeConfigPre=function(){
+
+if (window.confirm("Vous allez être rediriger vers la partie configuration du quiz.")) { 
+window.location.href = "http://51.75.207.43/daylightQuizEditor/configEditor.html?type=pre&master="+master
+}
+
+
+}
+
+var seeConfigPost=function(){
+
+if (window.confirm("Vous allez être rediriger vers la partie configuration du quiz.")) { 
+window.location.href = "http://51.75.207.43/daylightQuizEditor/configEditor.html?type=post&master="+master
+}
+
+
+}  </script>
    
    <div id="main" style="width: 90%;margin:0 auto;">
    	
@@ -468,6 +485,8 @@ window.location.href = "http://51.75.207.43:3000/quizMaster"+master;
 <a onclick="checkQuiz()"class="btn btn-primary">VOIR LE QUIZ</a>
 <a onclick="downLoadScorm()" class="btn btn-info">PACKAGE SCORM</a>
 <a onclick="seeRaw()" class="btn btn-primary">VOIR LES DONNÉES</a>
+<a onclick="seeConfigPost()" class="btn btn-info">CONFIGURER LE QUIZ POSTPRESENTIEL</a>
+<a onclick="seeConfigPre()" class="btn btn-primary">CONFIGURER LE QUIZ PREPRESENTIEL</a>
 </div>
 	
 	</div>
