@@ -22,6 +22,16 @@ function getUrlVars() {
 }
 
 var master = getUrlVars()["master"];
+var prePost = getUrlVars()["type"];
+var reBack
+var prePostMaj=function(){
+
+
+if(prePost=="pre"){reBack="Pre"}
+else{reBack="Post"}
+return reBack
+
+}
 var urlSO='http://51.75.207.43:3000/quizMaster'
 var AjaxUL = urlSO+master
 
@@ -157,9 +167,9 @@ loadQuestion = function (){
 			
                 var x = JSON.parse(cosy);
 				console.log(x)      
-				qArray = x["quiz"+quizID]
-				aArray = x["answer_array"+quizID]
-				configArray = x["config"+quizID];
+				qArray = x["quizQuestionList"]
+				aArray = x["answersList"]
+				configArray = x["config"+prePostMaj];
                 for (var i = 0; i < qArray.length; i++) {
                     quizQuestions.push(
 
@@ -239,9 +249,9 @@ answersArray.push(value)
 
 
 var senOLO = function(){
-var compse = "quiz"+quizID
-var compse2 = "answer_array"+quizID
-var compse3 = "config"+quizID
+var compse = "quizQuestionList"
+var compse2 = "answersList"
+var compse3 = "config"+prePostMaj
 kal = {[compse]:arrayToJson,[compse2]:answersArray,[compse3]:configArray}
 $.ajax({
     url: AjaxUL,
@@ -260,9 +270,9 @@ $.ajax({
 }
 
 var senOLO2 = function(){
-var compse = "quiz"+quizID
-var compse2 = "answer_array"+quizID
-var compse3 = "config"+quizID
+var compse = "quizQuestionList"
+var compse2 = "answersList"
+var compse3 = "config"+prePostMaj
 kal = {[compse]:arrayToJson,[compse2]:answersArray,[compse3]:configArray}
 $.ajax({
     url: AjaxUL,
@@ -422,7 +432,7 @@ textarea { height: 80px; resize: none; }
 var checkQuiz=function(){
 
 if (window.confirm("Vous allez être rediriger vers la prévisualisation du Quiz, merci de confirmer.")) { 
-window.location.href = "http://51.75.207.43/daylightQuizEditor/quizChapter/chap"+master;
+window.location.href = "http://51.75.207.43/daylightQuizEditor/quizChapter/"+prePost+"/chap"+master;
 }
 
 
@@ -431,7 +441,7 @@ window.location.href = "http://51.75.207.43/daylightQuizEditor/quizChapter/chap"
 var downLoadScorm=function(){
 
 if (window.confirm("Télécharger le package SCORM?")) { 
-window.location.href = "http://51.75.207.43/daylightQuizEditor/quizChapter/chap"+master+"/chap"+master+".zip";
+window.location.href = "http://51.75.207.43/daylightQuizEditor/quizChapter/"+prePost+"/chap"+master+"/chap"+master+".zip";
 }
 
 
