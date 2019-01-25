@@ -1,6 +1,12 @@
 /*
  * IIFE to encapsulate code and avoid global variables
  */
+
+
+
+
+
+ 
 (function(){
 
     /*
@@ -28,7 +34,7 @@
      */
     function ResultsController(quizMetrics, DataService){
         var vm = this;
-
+	
         /*
          * The pattern used in the controllers in this app puts all the 
          * properties and methods available to the view at the top of the 
@@ -47,13 +53,16 @@
         vm.calculatePerc = calculatePerc; // named function defined below
         vm.calculateScore = calculateScore; // named function defined below
         vm.activeQuestion = 0;
+		vm.showResultConfig=showResultConfigFunction()	
 
         function calculatePerc(){
-            /*
+            /*alert("")
              * simply calculating the percentage of correct answers and returning the number
              */
+			 console.log(showResultConfig)
 			var mujo =redingo / DataService.quizQuestions.length * 100;
 			localStorage.setItem('masterScore',mujo);
+			localStorage.setItem('passScore',DataService.passScore);
 						setComplete();
             return redingo / DataService.quizQuestions.length * 100;
 

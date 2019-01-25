@@ -248,7 +248,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e6791c', end
    
 }
 .page-header {
-    border-bottom: 4px solid #eee;
+    border-bottom: none;
     margin: 40px 0 20px;
     padding-bottom: 9px;
 }

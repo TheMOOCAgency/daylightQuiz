@@ -2,11 +2,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script> 
-<script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script> 
 
 
-<script type="text/javascript" src="js/jquery.autocomplete.js"></script>
-<script type="text/javascript" src="js/jquery.autogrowtextarea.js"></script>
+<script src="js/jszip.min.js"></script>
+<script src="js/FileSaver.js"></script>
 
 <script type = "text/javascript"> 
 
@@ -32,6 +31,15 @@ else{reBack="Post"}
 return reBack
 
 }
+
+    var prePostMajCont=function(){
+	var Backso
+	
+	if(prePostMaj()=="Post"){Backso="Pre"}
+	else{Backso="Post"}
+	return Backso
+   
+   }
 var urlSO='http://51.75.207.43:3000/quizMaster'
 var AjaxUL = urlSO+master
 
@@ -170,6 +178,7 @@ loadQuestion = function (){
 				qArray = x["quizQuestionList"]
 				aArray = x["answersList"]
 				configArray = x["config"+prePostMaj()];
+				configArrayToSave = x["config"+prePostMajCont()];
                 for (var i = 0; i < qArray.length; i++) {
                     quizQuestions.push(
 
@@ -251,8 +260,9 @@ answersArray.push(value)
 var senOLO = function(){
 var compse = "quizQuestionList"
 var compse2 = "answersList"
-var compse3 = "config"+prePostMaj
-kal = {[compse]:arrayToJson,[compse2]:answersArray,[compse3]:configArray}
+var compse3 = "config"+prePostMaj()
+ var compse4 = "config"+prePostMajCont()
+kal = {[compse]:arrayToJson,[compse2]:answersArray,[compse3]:configArray,[compse4]:configArrayToSave,}
 $.ajax({
     url: AjaxUL,
     dataType: 'json',
@@ -272,8 +282,9 @@ $.ajax({
 var senOLO2 = function(){
 var compse = "quizQuestionList"
 var compse2 = "answersList"
-var compse3 = "config"+prePostMaj
-kal = {[compse]:arrayToJson,[compse2]:answersArray,[compse3]:configArray}
+var compse3 = "config"+prePostMaj()
+ var compse4 = "config"+prePostMajCont()
+kal = {[compse]:arrayToJson,[compse2]:answersArray,[compse3]:configArray,[compse4]:configArrayToSave,}
 $.ajax({
     url: AjaxUL,
     dataType: 'json',
@@ -333,6 +344,14 @@ qObj={
 }
    
 
+<!-- var zip = new JSZip(); -->
+<!-- zip.folder('http://51.75.207.43/daylightQuizEditor/quizChapter/'+prePost+'/chap'+master); -->
+<!-- zip.generateAsync({type:"blob"}) -->
+<!-- .then(function(content) { -->
+    <!-- // see FileSaver.js -->
+	<!-- var name = 'chap'+master+'zip' -->
+    <!-- saveAs(content, name); -->
+<!-- }); -->
 
   
 </script>

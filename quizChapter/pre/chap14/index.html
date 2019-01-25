@@ -8,6 +8,14 @@
 <script async>
 var quizID="14"
 var postOrPre="Pre"
+var showResultConfigFunction =function()	{
+var back
+if(postOrPre=="s"){back=true}
+else{back=false}
+return back
+}
+
+
 var x 
    var TotalBindQuest=0
      var configArray=[];
@@ -23,7 +31,7 @@ var x
         //code here
      	
      			$.ajax({
-                url: 'http://51.75.207.43:3000/quizMaster'+quizID,
+                url: 'https://daylight.themoocagency.com/quizMaster'+quizID,
                  type: 'GET',
                  dataType: 'html',
                  header: 'Content-Type: application/json; charset=utf-8',
@@ -72,7 +80,7 @@ $("#body").show();
      		
      });
      				<!-- } -->
-            
+           
 </script>
 <html lang="en" ng-app="turtleFacts">
    <head>
@@ -215,7 +223,7 @@ $("#body").show();
                </div>
             </div>
             <div class="row">
-               <div class="console.log console.log-danger" ng-show="quiz.error"> Erreur! Vous n'avez pas répondu à toutes les questions! <button class="close" ng-click="quiz.error = false">&times </button> </div>
+               <div class="alert alert-danger" ng-show="quiz.error"> Erreur! Vous n'avez pas répondu à toutes les questions! <button class="close" ng-click="quiz.error = false">&times </button> </div>
                <div id="popup" class="popup">Temps écoulé</br></br></br></br></br></br></br> <button class=" btn btn-warning blumental " ng-click="quiz.questionAnswered();quiz.reloadTime;" onclick="fadeOutInQuest();">Voir la réponse </button> </div>
                <div class="well well-sm startQuest questCol" ng-hide="quiz.finalise" id="startQuest" style="margin-top: 10px;">
                   <div class="row">

@@ -26,7 +26,7 @@ var maxQuestConfig
 var chronoButton
 var pauseButton
 var setShuffle
-var showResultConfig
+var showResultConfig=true
 var passScore
 // from configJson
 // from configJson
@@ -41,7 +41,7 @@ var bArray = "";
 
 function trueForce(){
 	$.ajax({
-            url: 'http://51.75.207.43:3000/quizMaster'+quizID,
+            url: 'https://daylight.themoocagency.com/quizMaster'+quizID,
             type: 'GET',
             dataType: 'html',
             header: 'Content-Type: application/json',
@@ -180,7 +180,7 @@ trueForce();
 loadQuestion = function (){
 
  $.ajax({
-             url: 'http://51.75.207.43:3000/quizMaster'+quizID,
+             url: 'https://daylight.themoocagency.com/quizMaster'+quizID,
             type: 'GET',
             dataType: 'html',
             header: 'Content-Type: application/json',
@@ -254,7 +254,7 @@ loadQuestion = function (){
 
     loadAnswers=function(){    $.ajax({
 			
-             url: 'http://51.75.207.43:3000/quizMaster'+quizID,
+             url: 'https://daylight.themoocagency.com/quizMaster'+quizID,
             type: 'GET',
             dataType: 'html',
             header: 'Content-Type: application/json',

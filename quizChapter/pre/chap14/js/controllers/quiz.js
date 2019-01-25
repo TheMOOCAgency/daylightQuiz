@@ -1,10 +1,13 @@
 var stopPop = false;
 var time = 99999;
-var listElemA 
+var listElemA
 var listElemB
 var showListElMark
-var showListElAns 
-  var userAns = [];
+var showListElAns
+var bindMyNestVar
+var userAns = [];
+var localStorageJs = Object.keys(localStorage);
+var rodes
 
 (function() {
 
@@ -20,7 +23,6 @@ var showListElAns
 
         var vm = this;
         vm.feedBack = false;
-
         vm.feedBackQuest = true;
         vm.feedBackGood = false;
         vm.feedBackWrong = false;
@@ -50,20 +52,31 @@ var showListElAns
         vm.showPrev = false;
         vm.progressTimeBar = true;
         vm.quesTime = 60;
+       
         var numQuestionsAnswered = 0;
         var rootMyQuest = 0;
+        var rootMyQuestCompt = 0;
         var listMyMarked = false
         var listMyAnswered = false
         var listMyAll = false
+        vm.quesImgShow = false;
+
         vm.listMyMarked = listMyMarked;
         vm.listMyAnswered = listMyAnswered;
         vm.listMyAll = listMyAll;
-
         listElemA = jQuery('.listMyRideA')
         listElemB = jQuery('.listMyRideB')
 
-        var numberQUestion = 50;
-
+        var numberQUestion = 9999;
+		
+		vm.chronoButton=DataService.chronoButton
+		vm.pauseButton=DataService.pauseButton
+		vm.setShuffle=DataService.setShuffle
+		vm.showResultConfig=DataService.showResultConfig	
+		
+		
+		 vm.showResultConfig = DataService.showResultConfig;
+		
 
         showListElMark = function() {
             for (var i = 0; i < numberQUestion; i++) {
@@ -90,8 +103,8 @@ var showListElAns
                     listElemA = jQuery('.listMyRideB');
                     $(listElemA[i]).css('font-size', ' 0px')
                 }
-				
-				     if (localStorage.getItem('questAns' + i) == false || localStorage.getItem('questAns' + i) == 'false' || localStorage.getItem('questAns' + i) == 'null'|| localStorage.getItem('questAns' + i) == null|| localStorage.getItem('questAns' + i) == 'undefined' || localStorage.getItem('questAns' + i) == undefined)
+
+                if (localStorage.getItem('questAns' + i) == false || localStorage.getItem('questAns' + i) == 'false' || localStorage.getItem('questAns' + i) == 'null' || localStorage.getItem('questAns' + i) == null || localStorage.getItem('questAns' + i) == 'undefined' || localStorage.getItem('questAns' + i) == undefined)
 
                 {
                     listElemA = jQuery('.listMyRideB');
@@ -301,10 +314,30 @@ var showListElAns
         }
 
         function questionAnswered() {
+            localStorageJs = Object.keys(localStorage)
+            var ArrayCount = []
+
+            for (var r = 0; r < TotalBindQuest; r++) {
+
+                if (localStorage.getItem('questAns' + r == true) || localStorage.getItem('questAns' + r) == 'true') {
+                    ArrayCount.push(r);
+                    jQuery("#bindMyNest").text(ArrayCount.length)
+                }
+
+            }
+
+            bindMyNestVar = parseInt(localStorage.getItem("rootMyQuestCompt"))
+            if (isNaN(bindMyNestVar)) {
+                bindMyNestVar = 0
+            }
+            jQuery("#bindMyNestTot").text(TotalBindQuest);
+
+
             if (DataService.quizQuestions[vm.activeQuestion].selected == null) {
                 DataService.quizQuestions[vm.activeQuestion].selected = 999;
             }
             rootMyQuest = rootMyQuest + 1;
+            localStorage.setItem("rootMyQuest", rootMyQuest)
 
             vm.submit = false;
 
@@ -312,8 +345,8 @@ var showListElAns
 
         function questionAnswered2() {
 
-            if (vm.finalise == false) {
 
+            if (vm.finalise == false) {
                 vm.feedBack = false;
                 vm.feedBackQuest = true;
                 vm.submit = true;
@@ -413,23 +446,29 @@ var showListElAns
 
 
         function selectAnswer(index) {
-          
+
             if (DataService.quizQuestions[vm.activeQuestion].selected == index) {
-				localStorage.setItem('questAns' + activeWear, false);
-			
+                localStorage.setItem('questAns' + activeWear, false);
+                rootMyQuestCompt = rootMyQuestCompt - 1;
+                localStorage.setItem("rootMyQuestCompt", rootMyQuestCompt);
+
+
                 DataService.quizQuestions[vm.activeQuestion].selected = null;
                 index = null;
-				userAns[activeWear]=null;
+                userAns[activeWear] = null;
+            } else {
+                DataService.quizQuestions[vm.activeQuestion].selected = index;
+                userAns[activeWear] = index + 1;
+
+
+                var testStock = DataService.quizQuestions[vm.activeQuestion].selected;
+                rootMyQuestCompt = rootMyQuestCompt + 1;
+                localStorage.setItem("rootMyQuestCompt", rootMyQuestCompt);
+                localStorage.setItem('questAns' + activeWear, true)
             }
-			else{
-            DataService.quizQuestions[vm.activeQuestion].selected = index;
-			userAns[activeWear]=index+1;
 
-  
-            var testStock = DataService.quizQuestions[vm.activeQuestion].selected;
 
-            localStorage.setItem('questAns' + activeWear, true)
-			}
+
         }
 
         function selectNoAnswer(index) {
@@ -437,7 +476,8 @@ var showListElAns
         }
 
         function finaliseAnswers() {
-		stopTwo=1;
+			
+            stopTwo = 1;
             vm.finalise = false;
             numQuestionsAnswered = 0;
             quizMetrics.markQuiz();

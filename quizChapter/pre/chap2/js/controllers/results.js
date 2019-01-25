@@ -1,6 +1,7 @@
 /*
  * IIFE to encapsulate code and avoid global variables
  */
+
 (function(){
 
     /*
@@ -47,13 +48,16 @@
         vm.calculatePerc = calculatePerc; // named function defined below
         vm.calculateScore = calculateScore; // named function defined below
         vm.activeQuestion = 0;
+		vm.showResultConfig=DataService.showResultConfig	
 
         function calculatePerc(){
             /*
              * simply calculating the percentage of correct answers and returning the number
              */
+			 
 			var mujo =redingo / DataService.quizQuestions.length * 100;
 			localStorage.setItem('masterScore',mujo);
+			localStorage.setItem('passScore',DataService.passScore);
 						setComplete();
             return redingo / DataService.quizQuestions.length * 100;
 
