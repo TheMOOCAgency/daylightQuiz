@@ -15,6 +15,7 @@
        return vars;
    }
    
+
    var master = getUrlVars()["master"];
    var prePost = getUrlVars()["type"];
    var reBack
@@ -35,7 +36,7 @@
 	return Backso
    
    }
-   var urlSO='http://51.75.207.43:3000/quizMaster'
+   var urlSO='https://daylight.themoocagency.com/quizMaster'
    var AjaxUL = urlSO+master
    
    
@@ -130,7 +131,7 @@
    }
    
 	function welcome(){
-	 window.location.href = "http://51.75.207.43/daylightQuizEditor/"
+	 window.location.href = "https://daylight-back.themoocagency.com/daylightQuizEditor/"
 	}
    
    
@@ -229,8 +230,8 @@
 								
    }
    
-  function validate(arg){
-							if(arg==0){
+  function validate(){
+					
 								intro=[""]
 								intro[0]=$("#intro1")[0].value
 								intro[1]=$("#intro2")[0].value;
@@ -299,10 +300,7 @@
 								senOLO2();
 								}
 							
-							}
-							else {
-							alert('Attention, le formulaire contient des érreurs, merci de les corriger avant de valider.')
-							}
+						
 							
 							}
 							
@@ -405,7 +403,7 @@
       var checkQuiz=function(){
       
       if (window.confirm("Vous allez être rediriger vers la prévisualisation du Quiz, merci de confirmer.")) { 
-      window.location.href = "http://51.75.207.43/daylightQuizEditor/quizChapter/"+prePost+"/chap"+master;
+      window.location.href = "https://daylight-back.themoocagency.com/daylightQuizEditor/quizChapter/"+prePost+"/chap"+master;
       }
       
       
@@ -414,7 +412,7 @@
       var downLoadScorm=function(){
       
       if (window.confirm("Télécharger le package SCORM?")) { 
-      window.location.href = "http://51.75.207.43/daylightQuizEditor/quizChapter/"+prePost+"/chap"+master+"/chap"+master+".zip";
+      window.location.href = "https://daylight-back.themoocagency.com/daylightQuizEditor/quizChapter/"+prePost+"/chap"+master+"/chap"+master+".zip";
       }
       
       
@@ -424,7 +422,7 @@
       var seeRaw=function(){
       
       if (window.confirm("Vous allez être rediriger vers la prévisualisation des données, merci de confirmer.")) { 
-      window.location.href = "http://51.75.207.43:3000/quizMaster"+master;
+      window.location.href = "https://daylight.themoocagency.com/quizMaster"+master;
       }
       
       
@@ -479,7 +477,7 @@
       </div>
    </div>
    <div class="clearfix">
-      <label for="form-nbrQuest" class="form-label">Seuil de succès <em>*</em></label>
+      <label for="form-nbrQuest" class="form-label">Seuil de succès en %<em>*</em></label>
       <div class="form-input">
          <input type="number" maxlength="12" min="1" max="300" id="passScore" name="passScore" required="required"  placeholder="entrez un pourcentage de réussite" />
       </div>
@@ -540,12 +538,13 @@
 
    </div>  
    <div class=" clearfix" style="margin-left: 37%;  padding: 0.6em;">
-      <button  id="submission" style="color: #fff !important; background-color: #2196F3 !important; background: #2196F3 !important;color: #fff !important;  background-color: #2196F3 !important;  background: red;      background-color: red;  font-size: 16px;  padding: 15px;" onclick="validate(0)" >Enregistrer</button> 								
-      <button class="button" style="visibility:hidden"type="reset">Reset</button>
+ 
    </div>
 </form>
 
       </div>
+	  
+	  <div style="color: #fff !important;margin:auto; margin-bottom: 200px;background-color: #2196F3 !important; background: #2196F3 !important;color: #fff !important;  background-color: #2196F3 !important;  background: red;      background-color: red;  font-size: 16px;  padding: 16px;height: auto;width: 20%;text-align: center;    border-radius: 15px;cursor:pointer" onclick="validate()" data-kwdiaostructure="&quot;0&quot;:&quot;input&quot;,&quot;1&quot;:&quot;submit@@@@@@@KwDiaoTagDIV&quot;,&quot;2&quot;:&quot;Enregistrer&quot;" data-kwdiaohashid="input@submit@@@@@@@KwDiaoTagDIV@Enregistrer">Enregistrer</div>
       </div>
    
    </div>

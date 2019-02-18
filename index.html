@@ -19,7 +19,8 @@
    </style>
    <body>
       <script>
-         var AjaxUL= "http://51.75.207.43:3000/quizMaster"
+         var AjaxUL= "https://daylight.themoocagency.com/quizMaster"
+		 var urlSO = AjaxUL
          var quizID
          var quititle
          var titleArray
@@ -27,7 +28,7 @@
          function openQuiz(id){
          var thisid = id
          var itemId = thisid.substring(4, thisid.length);
-         var url = "http://51.75.207.43/daylightQuizEditor/quizChapter/pre/chap"
+         var url = "https://daylight-back.themoocagency.com/daylightQuizEditor/quizChapter/pre/chap"
          var urlCompose = url+itemId
          window.open(urlCompose)
          }
@@ -35,7 +36,7 @@
          function openQuizPost(id){
          var thisid = id
          var itemId = thisid.substring(4, thisid.length);
-         var url = "http://51.75.207.43/daylightQuizEditor/quizChapter/post/chap"
+         var url = "https://daylight-back.themoocagency.com/daylightQuizEditor/quizChapter/post/chap"
          var urlCompose = url+itemId
          window.open(urlCompose)
          }
@@ -43,14 +44,14 @@
          function editQuizPre(id){
          var thisid = id
          var itemId = thisid.substring(4, thisid.length);
-         var url = "http://51.75.207.43/daylightQuizEditor/questioneditor.html?type=pre&master="
+         var url = "https://daylight-back.themoocagency.com/daylightQuizEditor/questioneditor.html?type=pre&master="
          var urlCompose = url+itemId
          window.open(urlCompose)
          }
           function editQuizPost(id){
          var thisid = id
          var itemId = thisid.substring(4, thisid.length);
-         var url = "http://51.75.207.43/daylightQuizEditor/questioneditor.html?type=post&master="
+         var url = "https://daylight-back.themoocagency.com/daylightQuizEditor/questioneditor.html?type=post&master="
          var urlCompose = url+itemId
          window.open(urlCompose)
          }
@@ -64,8 +65,9 @@
           var template = 
           "<div class='col-md-4' id='thumbnailQ"+quizID+ "'><div class='card mb-4 shadow-sm'><img class='card-img-top' src='https://academie.daylight.fr/media/microsite/academie-daylight/auto/images/logo.png' alt='Card image cap'> <div class='card-body'> <p class='card-text'>"+quititle+"</p><div class='d-flex justify-content-between align-items-center'><div class='btn-group'> <button id='view"+quizID+"'type='button' class='btn btn-sm btn-outline-secondary' onclick='openQuiz()' style='font-weight: bolder'>View</button><button type='button' id='edit"+quizID+"' class='btn btn-sm btn-outline-secondary' onclick='editQuiz(this.id)' style='font-weight: bolder'>Edit</button> </div><small class='text-muted'>9 mins</small></div></div></div></div>"
           
-          
-          
+var CreatorQuizID
+var CreatorQuizIDPlace   
+ var stopMLe="Fonction désactivée "         
           loadQuestion = function (){
          $.ajax({
                    url: AjaxUL,
@@ -85,6 +87,8 @@
          		quizID=i;
          		var quizIDps1 = quizID+1
          		var targetI=$("#mainROW")
+				CreatorQuizID=quizID+2
+				CreatorQuizIDPlace=quizID+1
          		quititle = titleArray[i]
          		template = 
          		"<div class='col-md-4' id='thumbnailQ"+quizIDps1+"'><div class='card mb-4 shadow-sm'><img class='card-img-top' src='https://academie.daylight.fr/media/microsite/academie-daylight/auto/images/logo.png' style='width:80%;margin: 10px auto;'alt='Card image cap'> <div class='card-body'> <p class='card-text'>"+quititle+"</p><div class='d-flex justify-content-between align-items-center'><div class='btn-group'> <button id='view"+quizIDps1+"' type='button' class='btn btn-sm btn-outline-secondary' onclick='editQuizPre(this.id)' style='font-weight: bolder;font-size: 58%'>Préprésentiel</button><button type='button' id='edit"+quizIDps1+"' class='btn btn-sm btn-outline-warning' onclick='editQuizPost(this.id)' style='font-weight: bolder;font-size: 58%'>Postprésentiel</button> </div><small class='text-muted'></small></div></div></div></div>"
@@ -94,6 +98,12 @@
          		
          
                }
+			   
+			    var targetI = $("#mainROW")
+				
+            var templateCreation =
+                "<div class='col-md-4' id='thumbnailQ" + "" + "'><div class='card mb-4 shadow-sm'><img class='card-img-top' src='https://academie.daylight.fr/media/microsite/academie-daylight/auto/images/logo.png' style='width:80%;margin: 10px auto;'alt='Card image cap'> <div class='card-body'> <p class='card-text'>" + "Créer un nouveau quiz" + "</p><div class='d-flex justify-content-between align-items-center'><div class='btn-group'> <button id='view" + "" + "' type='button' class='btn btn-sm btn-outline-secondary' onclick='alert(stopMLe)' style='font-weight: bolder;font-size: 58%'>Créer un nouveau Quiz</button></div><small class='text-muted'></small></div></div></div></div>"
+            apendEl(targetI, templateCreation)
                }
          
          
@@ -101,8 +111,87 @@
          }
          
           loadQuestion() 
+
+
+
           
-          
+var emmptyObjh = ""
+
+
+<!-- function to create new instance -->
+<!-- function to create new instance -->
+<!-- function to create new instance -->
+<!-- function to create new instance -->
+ function updateBdTitle(titleArr){ 
+     $.ajax({
+       url: urlSO,
+       dataType: 'json',
+       type: 'post',
+       contentType: 'application/json',
+       data: JSON.stringify(titleArr),
+       processData: false,
+       success: function( data, textStatus, jQxhr ){
+           console.log(titleArr);
+		   window.location.reload();
+       },
+       error: function( jqXhr, textStatus, errorThrown ){
+           console.log( errorThrown );
+       }
+   });
+   
+}
+
+
+		
+		var loadTitile
+		var quizID
+		var CreatorQuizID
+		var CreatorQuizIDPlace
+         var quititle
+         var titleArray
+         var nbrQuiz
+	var title 
+	var tiret="-"
+	var number = CreatorQuizID
+	var titleTot=title+tiret+number
+	<!-- titleArray.push[title] -->
+   
+
+   
+   
+function  createNewQuiz(){
+
+ number = CreatorQuizID
+ if (number >29 ){alert("Attention, le nombre de quiz est limité à 30, pour plus d'informations, merci de contacter l'administrateur de la plateforme.")}
+ else{
+
+{
+               var retVal = prompt("Entrer le nom du Quiz: ", "titre içi");
+               title = retVal
+			   number = CreatorQuizID
+			   titleTot=number+tiret+title
+			   if (confirm("Creation du quiz : "+titleTot+". Voulez - vous continuer?" )) {
+					alert("Le Quiz "+ number+tiret+title+ " a bien été créé.")
+					titleArray.push(titleTot);
+					var hui = {
+  "quizPackage": number,
+  "quizTitle": titleArray
+}
+					updateBdTitle(hui)
+					
+					
+			   
+  
+} else {
+"Opération annulée"
+} 
+            }
+
+}   
+}   
+   
+
+        
       </script>
       <main role="main">
          <section class="jumbotron text-center" style="backgroundcolor:#F39000">

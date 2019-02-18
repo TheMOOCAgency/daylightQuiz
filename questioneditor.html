@@ -40,7 +40,7 @@ return reBack
 	return Backso
    
    }
-var urlSO='http://51.75.207.43:3000/quizMaster'
+var urlSO='https://daylight.themoocagency.com/quizMaster'
 var AjaxUL = urlSO+master
 
 
@@ -103,7 +103,7 @@ senOLO();
 
 function createtextAreaElement(elem,id){
 var alcNum=parseInt(id)+1
-$(elem).append("<div class='form-group' i="+id+1+" > <div class='col-sm-12 col-md-12 col-lg-12 top20'><h1>Question N°"+alcNum+"<button class='btn-primary' style='margin-left: 5px;font-size: 13px;padding: 5px;float:right;    background-color: #1886e4;background: #1886e4;' id="+id+" onclick='deleteQ(this.id)'>supprimer la question</button></h1><label for='title'>Intitulé:</label><textarea name='prequel' class='form-control' rows='4'>"+qArray[id].question_prequel+"</textarea><label for='rep1'>Réponse 1:</label><textarea class='form-control' rows='1' name='rep1'>"+qArray[id].possibilities[0]+"</textarea><label for='rep2'>Réponse 2:</label><textarea class='form-control' rows='1' name='rep2'>"+qArray[id].possibilities[1]+"</textarea><label for='rep3'>Réponse 3:</label><textarea class='form-control' rows='1' name='rep3'>"+qArray[id].possibilities[2]+"</textarea>	<label for='rep4'>Réponse 4:</label><textarea class='form-control' rows='1' name='rep4'>"+qArray[id].possibilities[3]+"</textarea><label for='sel1'>Bonne réponse:</label><select class='form-control selectAns' name='answer'><option value=1>"+qArray[id].possibilities[0]+"</option><option value=2>"+qArray[id].possibilities[1]+"</option><option value=3>"+qArray[id].possibilities[2]+"</option><option value=4>"+qArray[id].possibilities[2]+"</option></select><label for='feedBack'>feedback</label><textarea class='form-control' rows='4' name='feedBack'>"+qArray[id].feedback+"</textarea></div><div class='col-sm-12 col-md-12 col-lg-12 top20'>	<div class='col-sm-6 col-md-6 col-lg-6 textCenter'></div>	<div class='col-sm-6 col-md-6 col-lg-6 textCenter'></div></div></div>")
+$(elem).append("<div class='form-group' i="+id+1+" > <div class='col-sm-12 col-md-12 col-lg-12 top20'><h1>Question N°"+alcNum+"<button class='btn-primary' style='margin-left: 5px;font-size: 13px;padding: 5px;float:right;    background-color: #1886e4;background: #1886e4;' id="+id+" onclick='deleteQ(this.id)'>supprimer la question</button></h1><label for='title'>Intitulé:</label><textarea name='prequel' class='form-control' rows='4'>"+qArray[id].question_prequel+"</textarea><label for='rep1'>Réponse 1:</label><textarea class='form-control' rows='1' name='rep1'>"+qArray[id].possibilities[0]+"</textarea><label for='rep2'>Réponse 2:</label><textarea class='form-control' rows='1' name='rep2'>"+qArray[id].possibilities[1]+"</textarea><label for='rep3'>Réponse 3:</label><textarea class='form-control' rows='1' name='rep3'>"+qArray[id].possibilities[2]+"</textarea>	<label for='rep4'>Réponse 4:</label><textarea class='form-control' rows='1' name='rep4'>"+qArray[id].possibilities[3]+"</textarea><label for='sel1'>Bonne réponse:</label><select class='form-control selectAns' name='answer'><option value=1>"+qArray[id].possibilities[0]+"</option><option value=2>"+qArray[id].possibilities[1]+"</option><option value=3>"+qArray[id].possibilities[2]+"</option><option value=4>"+qArray[id].possibilities[3]+"</option></select><label for='feedBack'>feedback</label><textarea class='form-control' rows='4' name='feedBack'>"+qArray[id].feedback+"</textarea></div><div class='col-sm-12 col-md-12 col-lg-12 top20'>	<div class='col-sm-6 col-md-6 col-lg-6 textCenter'></div>	<div class='col-sm-6 col-md-6 col-lg-6 textCenter'></div></div></div>")
 
 <!-- partie anwers -->
 
@@ -169,12 +169,12 @@ loadQuestion = function (){
             cache: false,
             processData: false,
             success: function(data) {
-				console.log(data)
+			
                 var myObject = JSON.stringify(data);
 				var cosy = data.replace(/\\\"/g,"");
 			
                 var x = JSON.parse(cosy);
-				console.log(x)      
+	
 				qArray = x["quizQuestionList"]
 				aArray = x["answersList"]
 				configArray = x["config"+prePostMaj()];
@@ -344,16 +344,33 @@ qObj={
 }
    
 
-<!-- var zip = new JSZip(); -->
-<!-- zip.folder('http://51.75.207.43/daylightQuizEditor/quizChapter/'+prePost+'/chap'+master); -->
-<!-- zip.generateAsync({type:"blob"}) -->
-<!-- .then(function(content) { -->
-    <!-- // see FileSaver.js -->
-	<!-- var name = 'chap'+master+'zip' -->
-    <!-- saveAs(content, name); -->
-<!-- }); -->
 
-  
+function createQuiz(){
+var folder ="/var/www/html/daylightQuizEditor/quizChapter/"+prePost+"/chap"+master;
+var zip = "/var/www/html/daylightQuizEditor/quizChapter/"+prePost+"/chap"+master+"/chap"+master+".zip"
+
+
+					var data = {};
+					data.folder = folder;
+					data.zip = zip;
+					
+					$.ajax({
+						type: 'POST',
+						data: JSON.stringify(data),
+				        contentType: 'application/json',
+                          url: 'http://51.75.207.43:3001/createZipQuiz',						
+                        success: function(res) {
+                            console.log(res);
+
+                        }
+                    });
+
+}
+
+
+
+
+
 </script>
 <html lang="en" ng-app="turtleFacts">
    <head>
@@ -451,7 +468,7 @@ textarea { height: 80px; resize: none; }
 var checkQuiz=function(){
 
 if (window.confirm("Vous allez être rediriger vers la prévisualisation du Quiz, merci de confirmer.")) { 
-window.location.href = "http://51.75.207.43/daylightQuizEditor/quizChapter/"+prePost+"/chap"+master;
+window.location.href = "https://daylight-back.themoocagency.com/daylightQuizEditor/quizChapter/"+prePost+"/chap"+master;
 }
 
 
@@ -460,7 +477,7 @@ window.location.href = "http://51.75.207.43/daylightQuizEditor/quizChapter/"+pre
 var downLoadScorm=function(){
 
 if (window.confirm("Télécharger le package SCORM?")) { 
-window.location.href = "http://51.75.207.43/daylightQuizEditor/quizChapter/"+prePost+"/chap"+master+"/chap"+master+".zip";
+window.location.href = "https://daylight-back.themoocagency.com/daylightQuizEditor/quizChapter/"+prePost+"/chap"+master+"/chap"+master+".zip";
 }
 
 
@@ -470,7 +487,7 @@ window.location.href = "http://51.75.207.43/daylightQuizEditor/quizChapter/"+pre
 var seeRaw=function(){
 
 if (window.confirm("Vous allez être rediriger vers la prévisualisation des données, merci de confirmer.")) { 
-window.location.href = "http://51.75.207.43:3000/quizMaster"+master;
+window.location.href = "https://daylight.themoocagency.com/quizMaster"+master;
 }
 
 
@@ -479,7 +496,7 @@ window.location.href = "http://51.75.207.43:3000/quizMaster"+master;
 var seeConfigPre=function(){
 
 if (window.confirm("Vous allez être rediriger vers la partie configuration du quiz.")) { 
-window.location.href = "http://51.75.207.43/daylightQuizEditor/configEditor.html?type=pre&master="+master
+window.location.href = "https://daylight-back.themoocagency.com/daylightQuizEditor/configEditor.html?type=pre&master="+master
 }
 
 
@@ -488,11 +505,13 @@ window.location.href = "http://51.75.207.43/daylightQuizEditor/configEditor.html
 var seeConfigPost=function(){
 
 if (window.confirm("Vous allez être rediriger vers la partie configuration du quiz.")) { 
-window.location.href = "http://51.75.207.43/daylightQuizEditor/configEditor.html?type=post&master="+master
+window.location.href = "https://daylight-back.themoocagency.com/daylightQuizEditor/configEditor.html?type=post&master="+master
 }
 
 
-}  </script>
+} 
+
+ </script>
    
    <div id="main" style="width: 90%;margin:0 auto;">
    	
