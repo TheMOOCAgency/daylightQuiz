@@ -19,8 +19,15 @@
    </style>
    <body>
       <script>
-         var AjaxUL= "https://daylight.themoocagency.com/quizMaster"
-		 var urlSO = AjaxUL
+	  
+	  
+
+
+var BddURL = "https://daylight.themoocagency.com/quizMaster"	  
+var indexURL = "https://daylight-back.themoocagency.com/daylightQuizEditor"	  
+
+
+		 var urlSO = BddURL
          var quizID
          var quititle
          var titleArray
@@ -28,7 +35,7 @@
          function openQuiz(id){
          var thisid = id
          var itemId = thisid.substring(4, thisid.length);
-         var url = "https://daylight-back.themoocagency.com/daylightQuizEditor/quizChapter/pre/chap"
+         var url = indexURL+"/quizChapter/pre/chap"
          var urlCompose = url+itemId
          window.open(urlCompose)
          }
@@ -36,7 +43,7 @@
          function openQuizPost(id){
          var thisid = id
          var itemId = thisid.substring(4, thisid.length);
-         var url = "https://daylight-back.themoocagency.com/daylightQuizEditor/quizChapter/post/chap"
+         var url = indexURL+"/quizChapter/post/chap"
          var urlCompose = url+itemId
          window.open(urlCompose)
          }
@@ -44,14 +51,21 @@
          function editQuizPre(id){
          var thisid = id
          var itemId = thisid.substring(4, thisid.length);
-         var url = "https://daylight-back.themoocagency.com/daylightQuizEditor/questioneditor.html?type=pre&master="
+         var url = indexURL+"/questioneditor.html?type=pre&master="
+         var urlCompose = url+itemId
+         window.open(urlCompose)
+         }
+		 function editQuizPre2(id){
+         var thisid = id
+         var itemId = thisid.substring(4, thisid.length);
+         var url = indexURL+"/questioneditor2.html?type=pre&master="
          var urlCompose = url+itemId
          window.open(urlCompose)
          }
           function editQuizPost(id){
          var thisid = id
          var itemId = thisid.substring(4, thisid.length);
-         var url = "https://daylight-back.themoocagency.com/daylightQuizEditor/questioneditor.html?type=post&master="
+         var url = indexURL+"/questioneditor.html?type=post&master="
          var urlCompose = url+itemId
          window.open(urlCompose)
          }
@@ -70,7 +84,7 @@ var CreatorQuizIDPlace
  var stopMLe="Fonction désactivée "         
           loadQuestion = function (){
          $.ajax({
-                   url: AjaxUL,
+                   url: BddURL,
                    type: 'GET',
                    dataType: 'html',
                    header: 'Content-Type: application/json',
@@ -92,7 +106,12 @@ var CreatorQuizIDPlace
          		quititle = titleArray[i]
          		template = 
          		"<div class='col-md-4' id='thumbnailQ"+quizIDps1+"'><div class='card mb-4 shadow-sm'><img class='card-img-top' src='https://academie.daylight.fr/media/microsite/academie-daylight/auto/images/logo.png' style='width:80%;margin: 10px auto;'alt='Card image cap'> <div class='card-body'> <p class='card-text'>"+quititle+"</p><div class='d-flex justify-content-between align-items-center'><div class='btn-group'> <button id='view"+quizIDps1+"' type='button' class='btn btn-sm btn-outline-secondary' onclick='editQuizPre(this.id)' style='font-weight: bolder;font-size: 58%'>Préprésentiel</button><button type='button' id='edit"+quizIDps1+"' class='btn btn-sm btn-outline-warning' onclick='editQuizPost(this.id)' style='font-weight: bolder;font-size: 58%'>Postprésentiel</button> </div><small class='text-muted'></small></div></div></div></div>"
-         		 apendEl(targetI,template)
+				
+				template2 = 
+         		"<div class='col-md-4' id='thumbnailQ"+quizIDps1+"'><div class='card mb-4 shadow-sm'><img class='card-img-top' src='https://academie.daylight.fr/media/microsite/academie-daylight/auto/images/logo.png' style='width:80%;margin: 10px auto;'alt='Card image cap'> <div class='card-body'> <p class='card-text'>"+quititle+"</p><div class='d-flex justify-content-between align-items-center'><div class='btn-group'> <button id='view"+quizIDps1+"' type='button' class='btn btn-sm btn-outline-secondary' onclick='editQuizPre2(this.id)' style='font-weight: bolder;font-size: 58%'>Configurer le quiz</button> </div><small class='text-muted'></small></div></div></div></div>"
+         		 
+				 if (quizID<14){apendEl(targetI,template)}
+				 else{apendEl(targetI,template2)}
          
           
          		
@@ -102,7 +121,7 @@ var CreatorQuizIDPlace
 			    var targetI = $("#mainROW")
 				
             var templateCreation =
-                "<div class='col-md-4' id='thumbnailQ" + "" + "'><div class='card mb-4 shadow-sm'><img class='card-img-top' src='https://academie.daylight.fr/media/microsite/academie-daylight/auto/images/logo.png' style='width:80%;margin: 10px auto;'alt='Card image cap'> <div class='card-body'> <p class='card-text'>" + "Créer un nouveau quiz" + "</p><div class='d-flex justify-content-between align-items-center'><div class='btn-group'> <button id='view" + "" + "' type='button' class='btn btn-sm btn-outline-secondary' onclick='alert(stopMLe)' style='font-weight: bolder;font-size: 58%'>Créer un nouveau Quiz</button></div><small class='text-muted'></small></div></div></div></div>"
+                "<div class='col-md-4' id='thumbnailQ" + "" + "'><div class='card mb-4 shadow-sm'><img class='card-img-top' src='https://academie.daylight.fr/media/microsite/academie-daylight/auto/images/logo.png' style='width:80%;margin: 10px auto;'alt='Card image cap'> <div class='card-body'> <p class='card-text'>" + "Créer un nouveau quiz" + "</p><div class='d-flex justify-content-between align-items-center'><div class='btn-group'> <button id='view" + "" + "' type='button' class='btn btn-sm btn-outline-secondary' onclick='createNewQuiz()' style='font-weight: bolder;font-size: 58%'>Créer un nouveau Quiz</button></div><small class='text-muted'></small></div></div></div></div>"
             apendEl(targetI, templateCreation)
                }
          

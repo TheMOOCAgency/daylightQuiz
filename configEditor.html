@@ -7,6 +7,12 @@
 <script type="text/javascript" src="js/jquery.autogrowtextarea.js"></script>
 <script type = "text/javascript"> </script> 
 <script async>
+
+
+
+var BddURL = "https://daylight.themoocagency.com/quizMaster"	
+var indexURL = "https://daylight-back.themoocagency.com/daylightQuizEditor"	 
+
    function getUrlVars() {
        var vars = {};
        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
@@ -36,8 +42,8 @@
 	return Backso
    
    }
-   var urlSO='https://daylight.themoocagency.com/quizMaster'
-   var AjaxUL = urlSO+master
+
+   var AjaxUL = BddURL+master
    
    
    var configArray
@@ -131,7 +137,7 @@
    }
    
 	function welcome(){
-	 window.location.href = "https://daylight-back.themoocagency.com/daylightQuizEditor/"
+	 window.location.href = indexURL
 	}
    
    
@@ -225,7 +231,7 @@
             		$(".timeLeft").hide();
             	}
             });
-            		
+            if (document.querySelector("input[name='chronoButton']:checked")){$(".timeLeft").show()}	 	
 								
 								
    }
@@ -277,8 +283,8 @@
 								function changeToBoolean(arg){
 								 arrayB=arg
 								for(i=0;i<arrayB.length;i++)
-								if(window[arrayB[i]]="false"){window[arrayB[i]]=false}
-								if(window[arrayB[i]]="true"){window[arrayB[i]]=true}
+								if((window[arrayB[i]]=="false") || (window[arrayB[i]]==false)){window[arrayB[i]]=false}
+								if((window[arrayB[i]]=="true") || (window[arrayB[i]]==true)){window[arrayB[i]]=true}
 								console.log(window[i])
 								
 								}
@@ -403,7 +409,7 @@
       var checkQuiz=function(){
       
       if (window.confirm("Vous allez être rediriger vers la prévisualisation du Quiz, merci de confirmer.")) { 
-      window.location.href = "https://daylight-back.themoocagency.com/daylightQuizEditor/quizChapter/"+prePost+"/chap"+master;
+      window.location.href = indexURL+"/quizChapter/"+prePost+"/chap"+master;
       }
       
       
@@ -412,7 +418,7 @@
       var downLoadScorm=function(){
       
       if (window.confirm("Télécharger le package SCORM?")) { 
-      window.location.href = "https://daylight-back.themoocagency.com/daylightQuizEditor/quizChapter/"+prePost+"/chap"+master+"/chap"+master+".zip";
+      window.location.href = indexURL+"/quizChapter/"+prePost+"/chap"+master+"/chap"+master+".zip";
       }
       
       
@@ -422,7 +428,7 @@
       var seeRaw=function(){
       
       if (window.confirm("Vous allez être rediriger vers la prévisualisation des données, merci de confirmer.")) { 
-      window.location.href = "https://daylight.themoocagency.com/quizMaster"+master;
+      window.location.href =BddURL+master;
       }
       
       
@@ -503,9 +509,7 @@
             <input type="radio" name="chronoButton" value=false /> Non
             </label>
          </div>
-         <script>
-        		
-         </script>
+   
          <div class="form-input timeLeft">
             <label for="form-nbrQuest" class="form-label">Bouton Pause </label>
             <div class="form-input">
@@ -525,6 +529,10 @@
          </div>
       </div>
    </div>
+   
+		<script>
+        		
+         </script>
 
    <div class="clearfix">
       <label for="form-gender" class="form-label">Masquer les réponses pour l’apprenant </label>

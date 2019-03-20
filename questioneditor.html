@@ -12,6 +12,12 @@
 </script> 
 
 <script async>
+
+
+var BddURL = "https://daylight.themoocagency.com/"	  
+var indexURL = "https://daylight-back.themoocagency.com/daylightQuizEditor/"	  
+
+
 function getUrlVars() {
     var vars = {};
     var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
@@ -40,8 +46,11 @@ return reBack
 	return Backso
    
    }
-var urlSO='https://daylight.themoocagency.com/quizMaster'
-var AjaxUL = urlSO+master
+
+<!-- var urlChange =   https://daylight-back.themoocagency.com/daylightQuizEditor/ -->
+var urlChange =   BddURL
+
+var AjaxUL = BddURL+"/quizMaster"+master
 
 
 var quizID="1a"
@@ -159,7 +168,7 @@ function saveAll(){
    
    saveData(arrayToJson, "config.json");
    }
-
+var target=$("#list")
 loadQuestion = function (){
 	 $.ajax({
             url: AjaxUL,
@@ -211,14 +220,15 @@ loadQuestion = function (){
                     );
 
         
-				var target=$("#list")
-				createtextAreaElement(target,i)
+		target=$("#list")
+			
 				pushObje();
 
 
                 }
 
-
+first100();
+showButton();
 
             }
 
@@ -227,6 +237,18 @@ loadQuestion = function (){
         });
 
 	
+}
+
+
+function first100(){
+
+for (var i = 0; i < qArray.length; i++) {createtextAreaElement(target,i)}
+
+
+}
+
+function showButton(){
+$("#validate").show();
 }
 
 loadQuestion()
@@ -248,8 +270,10 @@ var allaSelAns = $('.selectAns')
 
 for (var i = 0; i < allaSelAns.length; i++) {
 ouja = $('.selectAns')[i]
-var value = $(ouja).find(":selected").attr("value");
-answersArray.push(value)
+var valued = $(ouja).find(":selected").attr("value");
+valued = parseInt(valued)
+answersArray.push(valued)
+console.log(answersArray)
 }
 
 }
@@ -262,7 +286,10 @@ var compse = "quizQuestionList"
 var compse2 = "answersList"
 var compse3 = "config"+prePostMaj()
  var compse4 = "config"+prePostMajCont()
-kal = {[compse]:arrayToJson,[compse2]:answersArray,[compse3]:configArray,[compse4]:configArrayToSave,}
+kal[compse]=arrayToJson
+kal[compse2]=answersArray
+kal[compse3]=configArray
+kal[compse4]=configArrayToSave
 $.ajax({
     url: AjaxUL,
     dataType: 'json',
@@ -284,7 +311,10 @@ var compse = "quizQuestionList"
 var compse2 = "answersList"
 var compse3 = "config"+prePostMaj()
  var compse4 = "config"+prePostMajCont()
-kal = {[compse]:arrayToJson,[compse2]:answersArray,[compse3]:configArray,[compse4]:configArrayToSave,}
+kal[compse]=arrayToJson
+kal[compse2]=answersArray
+kal[compse3]=configArray
+kal[compse4]=configArrayToSave
 $.ajax({
     url: AjaxUL,
     dataType: 'json',
@@ -300,8 +330,6 @@ $.ajax({
     }
 });
 }
-
-
 
 
 function createNewObj(target1,target2){$
@@ -468,7 +496,7 @@ textarea { height: 80px; resize: none; }
 var checkQuiz=function(){
 
 if (window.confirm("Vous allez être rediriger vers la prévisualisation du Quiz, merci de confirmer.")) { 
-window.location.href = "https://daylight-back.themoocagency.com/daylightQuizEditor/quizChapter/"+prePost+"/chap"+master;
+window.location.href = indexURL +"quizChapter/"+prePost+"/chap"+master;
 }
 
 
@@ -477,7 +505,7 @@ window.location.href = "https://daylight-back.themoocagency.com/daylightQuizEdit
 var downLoadScorm=function(){
 
 if (window.confirm("Télécharger le package SCORM?")) { 
-window.location.href = "https://daylight-back.themoocagency.com/daylightQuizEditor/quizChapter/"+prePost+"/chap"+master+"/chap"+master+".zip";
+window.location.href =  indexURL + "quizChapter/"+prePost+"/chap"+master+"/chap"+master+".zip";
 }
 
 
@@ -487,7 +515,7 @@ window.location.href = "https://daylight-back.themoocagency.com/daylightQuizEdit
 var seeRaw=function(){
 
 if (window.confirm("Vous allez être rediriger vers la prévisualisation des données, merci de confirmer.")) { 
-window.location.href = "https://daylight.themoocagency.com/quizMaster"+master;
+window.location.href = urlChange+ "/quizMaster"+master;
 }
 
 
@@ -496,7 +524,7 @@ window.location.href = "https://daylight.themoocagency.com/quizMaster"+master;
 var seeConfigPre=function(){
 
 if (window.confirm("Vous allez être rediriger vers la partie configuration du quiz.")) { 
-window.location.href = "https://daylight-back.themoocagency.com/daylightQuizEditor/configEditor.html?type=pre&master="+master
+window.location.href = indexURL+"configEditor.html?type=pre&master="+master
 }
 
 
@@ -505,7 +533,7 @@ window.location.href = "https://daylight-back.themoocagency.com/daylightQuizEdit
 var seeConfigPost=function(){
 
 if (window.confirm("Vous allez être rediriger vers la partie configuration du quiz.")) { 
-window.location.href = "https://daylight-back.themoocagency.com/daylightQuizEditor/configEditor.html?type=post&master="+master
+window.location.href = indexURL+"configEditor.html?type=post&master="+master
 }
 
 
@@ -552,15 +580,15 @@ window.location.href = "https://daylight-back.themoocagency.com/daylightQuizEdit
 
 	</div>
 	
-	   <div class="row bottom40" id="validate"> 
+	   <div class="row bottom40" id="validate" style="display:none;position: fixed;  bottom: 20px;  right: 20px;  background-color: gray;  padding: 30px;"> 
    
 	<div class='col-sm-12 col-md-12 col-lg-12 top20'>	
 		<div class='col-sm-6 col-md-6 col-lg-6 textCenter'>
-<button type="button" class="btn btn-primary">RESET</button>
+<button type="button" class="btn btn-primary odaNone " style="">RESET</button>
 
 		</div>	
 		<div class='col-sm-6 col-md-6 col-lg-6 textCenter'>
-	<button type="button" class="btn btn-success" onclick="pushObje(); senOLO()">VALIDATE</button>
+	<button type="button" class="btn btn-success odaNone"   onclick="pushObje(); senOLO()">VALIDATE</button>
 		</div>
 	</div>
 	
