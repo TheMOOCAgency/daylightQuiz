@@ -13,8 +13,8 @@
 
 <script async>
 
-var BddURL = "https://daylight.themoocagency.com/quizMaster"	
-var indexURL = "https://daylight-back.themoocagency.com/daylightQuizEditor"	 
+var BddURL = "https://daylight.themoocagency.com"	
+var indexURL = "https://daylight-back.themoocagency.com/daylightQuizEditor/"	 
 
 var reset = function(){window.location.reload()}
 function getUrlVars() {
@@ -271,9 +271,9 @@ var allaSelAns = $('.selectAns')
 for (var i = 0; i < allaSelAns.length; i++) {
 ouja = $('.selectAns')[i]
 var value = $(ouja).find(":selected").attr("value");
-answersArray.push(value)
+var oudja = parseFloat(value)
+answersArray.push(oudja)
 }
-
 }
 
 
