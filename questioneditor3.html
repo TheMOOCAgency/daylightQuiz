@@ -487,6 +487,10 @@ textarea { height: 80px; resize: none; }
   // contact form animations
   $('#contact').click(function() {
     $('#contactForm').fadeToggle();
+	var jino = quizQuestions.length
+	var jinoPlusOne=jino+1
+	kal = $('#contactForm')
+$(kal).find("textarea[name='quesNumber']").val(jinoPlusOne)
   })
   $(document).mouseup(function (e) {
     var container = $("#contactForm");
@@ -577,8 +581,7 @@ window.location.href = indexURL+"configEditor3.html?type=post&master="+master
 	 
 	</script>
 
-
-<div id="contactForm" style="z-index: 9999;">  	<h1>Ajouter une question</h1>  	<div class="col-sm-12 col-md-12 col-lg-12 top20"><label style="margin-top:5px" for="sel1">Numero de la Question</label style="margin-top:5px"><textarea class="form-control" rows="1" name="quesNumber"></textarea><label style="margin-top:5px" for="title">Intitulé:</label style="margin-top:5px"><textarea name="prequel" class="form-control" rows="4"></textarea><label style="margin-top:5px" for="rep1">Réponse 1:</label style="margin-top:5px"><textarea style="height:45px;" class="form-control" rows="1" name="rep1"></textarea><label style="margin-top:5px" for="rep2">Réponse 2:</label style="margin-top:5px"><textarea style="height:45px;" class="form-control" rows="1" name="rep2"></textarea><label style="margin-top:5px" for="rep3">Réponse 3:</label style="margin-top:5px"><textarea style="height:45px;" class="form-control" rows="1" name="rep3"></textarea>	<label style="margin-top:5px" for="rep4">Réponse 4:</label style="margin-top:5px"><textarea style="height:45px;" class="form-control" rows="1" name="rep4"></textarea><label style="margin-top:5px" for="rep4">numero de la bonne réponse :</label style="margin-top:5px"><textarea class="form-control" rows="1" name="goodRep"></textarea><label style="margin-top:5px" for="feedBack">feedback</label style="margin-top:5px"><textarea class="form-control" rows="4" name="feedBack"> 	</textarea> 	<button type="button" class="btn btn-success" style="margin-top:40px"onclick="ValidateNewENtry()">VALIDATE</button> 	</div> </div>
+<div id="contactForm" style="z-index: 9999;">  	<h1>Ajouter une question</h1>  	<div class="col-sm-12 col-md-12 col-lg-12 top20"><label style="margin-top:5px" for="sel1"></label style="margin-top:5px"><textarea style="opacity:0" class="form-control" rows="1" name="quesNumber"></textarea><label style="margin-top:5px" for="title">Intitulé:</label style="margin-top:5px"><textarea name="prequel" class="form-control" rows="4"></textarea><label style="margin-top:5px" for="rep1">Réponse 1:</label style="margin-top:5px"><textarea style="height:45px;" class="form-control" rows="1" name="rep1"></textarea><label style="margin-top:5px" for="rep2">Réponse 2:</label style="margin-top:5px"><textarea style="height:45px;" class="form-control" rows="1" name="rep2"></textarea><label style="margin-top:5px" for="rep3">Réponse 3:</label style="margin-top:5px"><textarea style="height:45px;" class="form-control" rows="1" name="rep3"></textarea>	<label style="margin-top:5px" for="rep4">Réponse 4:</label style="margin-top:5px"><textarea style="height:45px;" class="form-control" rows="1" name="rep4"></textarea><label style="margin-top:5px" for="rep4">numero de la bonne réponse :</label style="margin-top:5px"><textarea class="form-control" rows="1" name="goodRep"></textarea><label style="margin-top:5px" for="feedBack">feedback</label style="margin-top:5px"><textarea class="form-control" rows="4" name="feedBack"> 	</textarea> 	<button type="button" class="btn btn-success" style="margin-top:40px"onclick="ValidateNewENtry()">VALIDATE</button> 	</div> </div>
  
  
 

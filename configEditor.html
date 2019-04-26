@@ -245,7 +245,19 @@ var indexURL = "https://daylight-back.themoocagency.com/daylightQuizEditor/"
 								quizNQuestion=	document.querySelector('input[name="quizNQuestion"]').value
 								quizMaxQuestion=document.querySelector('input[name="quizMaxQuestion"]').value							
 								subTitle=document.querySelector('input[name="quizSubTitle"]').value;
-								showResultConfig=document.querySelector("input[name='showResultConfig']:checked").value;
+								
+								function showResultConfigp(){
+								var pimpH
+								var inverse = document.querySelector("input[name='showResultConfig']:checked").value
+								
+								if (inverse==false || inverse=="false"){pimpH=true}
+								else{pimpH=false}
+								console.log(pimpH)
+								return pimpH
+								}
+								
+								
+								showResultConfig=showResultConfigp()
 								passScore=document.querySelector("input[name='passScore']").value;
 								time=document.querySelector("input[name='time']").value;
 								
@@ -272,6 +284,8 @@ var indexURL = "https://daylight-back.themoocagency.com/daylightQuizEditor/"
 								
 								
 								setShuffle=document.querySelector("input[name='setShuffle']:checked").value;
+								if (setShuffle=="true"){setShuffle=true;}
+								if (setShuffle=="false"){setShuffle=false;}
 								quizTitle=document.querySelector("input[name='quizTitle']").value;
 								answerFile="answersdemo14"
 								questionFile="questiondemo14"
@@ -295,8 +309,10 @@ var indexURL = "https://daylight-back.themoocagency.com/daylightQuizEditor/"
 								{window[arrayC[i]]=parseInt(window[arrayC[i]])}
 								
 								}
-								
-								changeToBoolean(["chronoButton","pauseButton","setShuffle","showResultConfig"])		
+	
+								changeToBoolean(["chronoButton","pauseButton","setShuffle","showResultConfig"])	
+												
+								changeToBoolean(configArrayToSave)		
 								changeToNumber(["passScore","quizMaxQuestion","quizNQuestion","time"])
 								
 								obhj={ 'quiz_title':quizTitle,'quiz_title2':subTitle,'quiz_id':quiz_id,'chronoButton':chronoButton,      'pauseButton':pauseButton, 'setShuffle':setShuffle,'showResultConfig':showResultConfig,'passScore':passScore,'quiz_n_questions':quizNQuestion,'quiz_n_questionsMax':quizMaxQuestion,'answers_file_name':answerFile,'question_file_name':questionFile,'quiz_time':time,'SubLines':intro}
