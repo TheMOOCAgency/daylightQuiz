@@ -41,7 +41,7 @@ var bArray = "";
 
 function trueForce(){
 	$.ajax({
-                url: 'https://daylight.themoocagency.com/quizMaster'+quizID,
+            url: masterUrl+quizID,
             type: 'GET',
             dataType: 'html',
             header: 'Content-Type: application/json',
@@ -156,8 +156,17 @@ function trueForce(){
             return dataObj;
         }
 
-        var masterQuestIMGURL = 'ressourses/img/';
-        var masterAnswerIMGURL = 'ressourses/img/';
+
+		function postOrPreTexan(){
+			var beBack
+			if(postOrPre=="Pre"){beBack="pre"}
+			else{beBack="post"}
+			return beBack
+			
+		}
+			
+        var masterQuestIMGURL = imgUrl+'quiz'+quizID+'/'+postOrPreTexan()+'/';
+        var masterAnswerIMGURL = imgUrl+'quiz'+quizID+'/'+postOrPreTexan()+'/';
         var masterAnswerSongURL = 'ressourses/son/';
         var masterQuestionSongURL = 'ressourses/son/';
 
@@ -180,7 +189,7 @@ trueForce();
 loadQuestion = function (){
 
  $.ajax({
-                 url: 'https://daylight.themoocagency.com/quizMaster'+quizID,
+             url: 'https://daylight.themoocagency.com/quizMaster'+quizID,
             type: 'GET',
             dataType: 'html',
             header: 'Content-Type: application/json',
@@ -225,7 +234,9 @@ loadQuestion = function (){
                             questionImgContain :qArray[listShuffle[i]].questionImgContain,
                         }
                     );
-
+					
+					console.log(masterQuestIMGURL+"q"+parseInt(parseInt([listShuffle[i]])+1)+".png")
+					
                     quizQuestions[0].selected = true
 
 
@@ -254,7 +265,7 @@ loadQuestion = function (){
 
     loadAnswers=function(){    $.ajax({
 			
-                 url: 'https://daylight.themoocagency.com/quizMaster'+quizID,
+             url: 'https://daylight.themoocagency.com/quizMaster'+quizID,
             type: 'GET',
             dataType: 'html',
             header: 'Content-Type: application/json',
@@ -296,7 +307,7 @@ loadQuestion = function (){
         });
 	}
 	
-	
+
 
        	   
         var turtlesData = [{

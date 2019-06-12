@@ -41,7 +41,7 @@ var bArray = "";
 
 function trueForce(){
 	$.ajax({
-            url: 'https://daylight.themoocagency.com/quizMaster'+quizID,
+            url: masterUrl+quizID,
             type: 'GET',
             dataType: 'html',
             header: 'Content-Type: application/json',
@@ -156,7 +156,7 @@ function trueForce(){
             return dataObj;
         }
 
-        var masterQuestIMGURL = 'ressourses/img/';
+        var masterQuestIMGURL = imgUrl+'quiz'+quizID+'/'+postOrPre+'/';
         var masterAnswerIMGURL = 'ressourses/img/';
         var masterAnswerSongURL = 'ressourses/son/';
         var masterQuestionSongURL = 'ressourses/son/';
@@ -225,7 +225,9 @@ loadQuestion = function (){
                             questionImgContain :qArray[listShuffle[i]].questionImgContain,
                         }
                     );
-
+					
+					console.log(masterQuestIMGURL+"q"+parseInt(parseInt([listShuffle[i]])+1)+".png")
+					
                     quizQuestions[0].selected = true
 
 
